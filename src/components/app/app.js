@@ -6,8 +6,11 @@ import TodoList from '../todo-list';
 import ItemStatusFilter from '../item-status-filter';
 
 import './app.css';
+import ItemAddForm from "../item-add-form";
 
 export default class App extends Component {
+
+  maxID = 100;
 
   state = {
     todoData: [
@@ -32,6 +35,26 @@ export default class App extends Component {
     });
   }
 
+  addItem = (text) => {
+    const newItem = {
+      label: text,
+      important: false,
+      id: this.maxID++
+    }
+
+    this.setState(({ todoData }) => {
+
+      const newArray = [
+        newItem,
+        ...todoData
+      ];
+
+      return {
+        todoData: newArray
+      };
+    });
+  }
+
   render() {
     return (
       <div className="todo-app">
@@ -44,7 +67,8 @@ export default class App extends Component {
         <TodoList
           todos={this.state.todoData}
           onDeleted={ this.deletedItem } />
+        <ItemAddForm onItemAdded={ this.addItem }/>
       </div>
-    );
+  );
   };
   }
