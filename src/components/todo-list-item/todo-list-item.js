@@ -5,6 +5,7 @@ import './todo-list-item.css';
 export default class TodoListItem extends Component {
 
   render() {
+    // деструктуризируем данные чтобы легче было использовать
     const { label, onDeleted,
       onToggleDone, onToggleImportant,
       important, done } = this.props;
@@ -20,6 +21,7 @@ export default class TodoListItem extends Component {
     }
 
     return (
+      // те самые видимые значения label
       <span className={ classNames }>
       <span
         className="todo-list-item-label"
